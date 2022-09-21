@@ -2,6 +2,7 @@ public class MissionDisk1 {
     public static String echo(String s, int anzahl) {
         return s.repeat(anzahl);
     }
+
     public static boolean genauEins(boolean a, boolean b) {
         return a ^ b;
     }

@@ -14,6 +14,8 @@
 
 ---
 
-Hier sind die Lösungen vom JavaGym und den MissionDisks des Informatik Vorkurses der Universität Duisburg-Essen. Aber immer dran denken: $ verstehen > ctrl+c$
+Hier sind die Lösungen vom JavaGym und den MissionDisks des Informatik Vorkurses der Universität Duisburg-Essen. Aber immer dran denken: $verstehen > ctrl+c$
 
-![](./assets/terminal.gif)
+<div align="center">
+    <img src="./assets/terminal.gif"/>
+</div>

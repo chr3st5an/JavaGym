@@ -2,6 +2,14 @@ import java.util.*;
 
 
 public class MissionDisk2 {
+    /*
+     * Hilfsmethode, da es in Java 8 noch nicht die
+     * eingebaute `repeat` String methode gibt
+     */
+    public static String repeat(String str, int n) {
+        return String.join("", Collections.nCopies(n, str));
+    }
+
 	public static int ggT(int a, int b) {
 		int max  = Math.max(a, b);
 		int min  = Math.min(a, b);
@@ -28,7 +36,7 @@ public class MissionDisk2 {
             }
         }
 
-        return true;
+        return x != 1;
 	}
 
 	public static String primfaktoren(int x) {
@@ -49,7 +57,7 @@ public class MissionDisk2 {
             x /= primzahl;
         }
 
-        return primfaktoren.strip();
+        return primfaktoren.trim();
 	}
 
 	public static int anzahlStellen(int x) {
@@ -112,7 +120,7 @@ public class MissionDisk2 {
             int res = x/((int) teiler);
 
             if (res >= 1) {
-                roemisch += roemischeZahlen.get(teiler).repeat(res);
+                roemisch += repeat(roemischeZahlen.get(teiler), res);
                 x -= ((int) teiler)*res;
             }
         }

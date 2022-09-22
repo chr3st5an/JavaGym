@@ -1,6 +1,9 @@
+import java.util.Collections;
+
+
 public class MissionDisk1 {
     public static String echo(String s, int anzahl) {
-        return s.repeat(anzahl);
+        return String.join("", Collections.nCopies(anzahl, s));
     }
 
     public static boolean genauEins(boolean a, boolean b) {
@@ -40,7 +43,7 @@ public class MissionDisk1 {
             }
         }
 
-        return true;
+        return x != 1;
     }
 
     public static int abrunden(int x, int raster) {

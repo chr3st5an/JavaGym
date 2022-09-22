@@ -1,7 +1,16 @@
 import java.util.Arrays;
+import java.util.Collections;
 
 
 public class JavaGym {
+    /*
+     * Hilfsmethode, da es in Java 8 noch nicht die
+     * eingebaute `repeat` String methode gibt
+     */
+    public static String repeat(String str, int n) {
+        return String.join("", Collections.nCopies(n, str));
+    }
+
     public static int vierundzwanzig() {
         return 24;
     }
@@ -64,7 +73,9 @@ public class JavaGym {
         final double preisButter = 1.79;
         final double preisEier = 1.55;
 
-        return preisNudeln*anzahlPaketeNudeln + preisButter*anzahlPaketeButter + preisEier*anzahlPaketeEier;
+        return preisNudeln*anzahlPaketeNudeln
+               + preisButter*anzahlPaketeButter
+               + preisEier*anzahlPaketeEier;
     }
 
     public static int flaecheninhalt(int x1, int x2, int y1, int y2) {
@@ -110,14 +121,14 @@ public class JavaGym {
                bam = "";
 
         if (minuten % 15 == 0) {
-            bim = "Bim".repeat((minuten > 0) ? minuten / 15 : 4);
+            bim = repeat("Bim", (minuten > 0) ? minuten / 15 : 4);
         }
 
         if (minuten == 0) {
             if (stunden == 0 || stunden == 12) {
-                bam = "Bam".repeat(12);
+                bam = repeat("Bam", 12);
             } else {
-                bam = "Bam".repeat((stunden > 11) ? stunden - 12 : stunden);
+                bam = repeat("Bam", (stunden > 11) ? stunden - 12 : stunden);
             }
         }
 

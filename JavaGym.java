@@ -121,14 +121,20 @@ public class JavaGym {
                bam = "";
 
         if (minuten % 15 == 0) {
-            bim = repeat("Bim", (minuten > 0) ? minuten / 15 : 4);
-        }
+            bim = repeat("Bim", minuten / 15);
 
-        if (minuten == 0) {
-            if (stunden == 0 || stunden == 12) {
-                bam = repeat("Bam", 12);
-            } else {
-                bam = repeat("Bam", (stunden > 11) ? stunden - 12 : stunden);
+            if (minuten == 0) {
+                bim = repeat("Bim", 4);
+
+                if (stunden == 0) {
+                    stunden = 12;
+                }
+
+                if (stunden > 12) {
+                    stunden -= 12;
+                }
+
+                bam = repeat("Bam", stunden);
             }
         }
 

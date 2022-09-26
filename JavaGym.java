@@ -2,15 +2,12 @@ import java.util.Arrays;
 import java.util.Collections;
 
 
+/**
+ * Lösungen zum JavaGym des Informatik Vorkurs WS 22
+ *
+ * @author chr3st5an
+ */
 public class JavaGym {
-    /*
-     * Hilfsmethode, da es in Java 8 noch nicht die
-     * eingebaute `repeat` String methode gibt
-     */
-    public static String repeat(String str, int n) {
-        return String.join("", Collections.nCopies(n, str));
-    }
-
     public static int vierundzwanzig() {
         return 24;
     }
@@ -34,10 +31,12 @@ public class JavaGym {
     }
 
     public static int betrag(int x) {
+        // |x|
         return Math.abs(x);
     }
 
     public static boolean istEinstellig(int x) {
+        // |x| < 10
         return Math.abs(x) < 10;
     }
 
@@ -73,16 +72,18 @@ public class JavaGym {
         final double preisButter = 1.79;
         final double preisEier = 1.55;
 
-        return preisNudeln*anzahlPaketeNudeln
-               + preisButter*anzahlPaketeButter
-               + preisEier*anzahlPaketeEier;
+        return (preisNudeln*anzahlPaketeNudeln
+              + preisButter*anzahlPaketeButter
+              + preisEier*anzahlPaketeEier);
     }
 
     public static int flaecheninhalt(int x1, int x2, int y1, int y2) {
+        // |x1 - x2| * |y1 - y2|
         return Math.abs(x1 - x2)*Math.abs(y1 - y2);
     }
 
     public static boolean istZweistellig(int x) {
+        // 9 < |x| && |x| < 100
         return (9 < Math.abs(x)) && (Math.abs(x) < 100);
     }
 
@@ -101,7 +102,9 @@ public class JavaGym {
     public static int summeGeradeZahlenBis(int n) {
         int sum = 0;
 
+        // Zwei ist die erste gerade natürliche Zahl
         for (int i = 2; i <= n; i++) {
+            // (i & 1) <=> i % 2
             sum += ((i & 1) == 1) ? 0 : i;
         }
 
@@ -109,20 +112,44 @@ public class JavaGym {
     }
 
     public static int mittlerste(int a, int b, int c) {
+        // Die Parameter werden in ein Array gepackt
         int[] arr = {a, b, c};
 
+        // Das Package "Arrays" sortiert das Array
         Arrays.sort(arr);
 
+        // Das mittlerste Item wird zurückgegeben
         return arr[1];
     }
 
+    /**
+     * Hilfsmethode, da es in Java 8 noch nicht die
+     * eingebaute `repeat` String methode gibt
+     *
+     * @param str der String, der wiederholt werden soll
+     * @param n wie oft der String wiederholt werden soll
+     * @return der wiederholte String
+     */
+    public static String repeat(String str, int n) {
+        return String.join("", Collections.nCopies(n, str));
+    }
+
     public static String glockenschlag(int stunden, int minuten) {
+        // Lokale Variablen
         String bim = "",
                bam = "";
 
+        /*
+         * Erst wenn der Rest der Division "minuten / 15" Null ist,
+         * besteht die Möglichkeit, dass es gerade eine Viertelstunde
+         * oder eine ganze Stunde ist
+         *
+         * Notiz: 0 % 15 = 0
+         */
         if (minuten % 15 == 0) {
             bim = repeat("Bim", minuten / 15);
 
+            // Wenn die Minuten gleich Null sind => Ganze Stunde
             if (minuten == 0) {
                 bim = repeat("Bim", 4);
 

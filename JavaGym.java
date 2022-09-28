@@ -1,7 +1,3 @@
-import java.util.Arrays;
-import java.util.Collections;
-
-
 /**
  * Lösungen zum JavaGym des Informatik Vorkurs WS 22
  *
@@ -112,14 +108,7 @@ public class JavaGym {
     }
 
     public static int mittlerste(int a, int b, int c) {
-        // Die Parameter werden in ein Array gepackt
-        int[] arr = {a, b, c};
-
-        // Das Package "Arrays" sortiert das Array
-        Arrays.sort(arr);
-
-        // Das mittlerste Item wird zurückgegeben
-        return arr[1];
+        return (a > Math.max(b, c)) ? Math.max(b, c) : Math.max(a, Math.min(b, c));
     }
 
     /**
@@ -130,8 +119,8 @@ public class JavaGym {
      * @param n wie oft der String wiederholt werden soll
      * @return der wiederholte String
      */
-    public static String repeat(String str, int n) {
-        return String.join("", Collections.nCopies(n, str));
+    static String repeat(String str, int n) {
+        return (n > 1) ? str + repeat(str, n - 1) : str;
     }
 
     public static String glockenschlag(int stunden, int minuten) {

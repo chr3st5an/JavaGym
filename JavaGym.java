@@ -120,7 +120,7 @@ public class JavaGym {
      * @return der wiederholte String
      */
     static String repeat(String str, int n) {
-        return (n > 1) ? str + repeat(str, n - 1) : str;
+        return (n > 0) ? str + repeat(str, n - 1) : "";
     }
 
     public static String glockenschlag(int stunden, int minuten) {

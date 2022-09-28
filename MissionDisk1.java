@@ -1,9 +1,6 @@
-import java.util.Collections;
-
-
 public class MissionDisk1 {
     public static String echo(String s, int anzahl) {
-        return String.join("", Collections.nCopies(anzahl, s));
+        return (anzahl > 0) ? s + echo(s, anzahl - 1) : "";
     }
 
     public static boolean genauEins(boolean a, boolean b) {

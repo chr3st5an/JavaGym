@@ -13,7 +13,7 @@ public class JavaGym {
     }
 
     public static int aendereVorzeichen(int x) {
-        return x*(-1);
+        return ~x + 1;
     }
 
     public static double dollar(double betragEuro) {
@@ -33,7 +33,7 @@ public class JavaGym {
 
     public static boolean istEinstellig(int x) {
         // |x| < 10
-        return Math.abs(x) < 10;
+        return betrag(x) < 10;
     }
 
     public static double celsius(double fahrenheit) {
@@ -75,12 +75,12 @@ public class JavaGym {
 
     public static int flaecheninhalt(int x1, int x2, int y1, int y2) {
         // |x1 - x2| * |y1 - y2|
-        return Math.abs(x1 - x2)*Math.abs(y1 - y2);
+        return betrag(x1 - x2)*betrag(y1 - y2);
     }
 
     public static boolean istZweistellig(int x) {
         // 9 < |x| && |x| < 100
-        return (9 < Math.abs(x)) && (Math.abs(x) < 100);
+        return (9 < betrag(x)) && (betrag(x) < 100);
     }
 
     public static int wartezeit(int stunden, int minuten) {
@@ -96,15 +96,11 @@ public class JavaGym {
     }
 
     public static int summeGeradeZahlenBis(int n) {
-        int sum = 0;
-
-        // Zwei ist die erste gerade natürliche Zahl
-        for (int i = 2; i <= n; i++) {
-            // (i & 1) <=> i % 2
-            sum += ((i & 1) == 1) ? 0 : i;
+        if (n > 1) {
+            return ((n & 1) == 1 ? 0 : n) + summeGeradeZahlenBis(n - 1);
         }
 
-        return sum;
+        return 0;
     }
 
     public static int mittlerste(int a, int b, int c) {

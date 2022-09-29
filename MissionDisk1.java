@@ -16,11 +16,11 @@ public class MissionDisk1 {
     }
 
     public static int millionaer(double i) {
-        return (int) Math.ceil(Math.log(1_000_000) / Math.log(1+i));
+        return (int) (Math.ceil(Math.log(1_000_000) / Math.log(1+i)));
     }
 
     public static int potenz(int basis, int exponent) {
-        return (int) Math.pow(basis, exponent);
+        return (int) (Math.pow(basis, exponent));
     }
 
     public static double ungefaehrPi(int anzahlSummanden) {

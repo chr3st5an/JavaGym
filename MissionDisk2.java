@@ -2,22 +2,24 @@ import java.util.*;
 
 
 public class MissionDisk2 {
-    /*
-     * Hilfsmethode, da es in Java 8 noch nicht die
-     * eingebaute `repeat` String methode gibt
-     */
-    public static String repeat(String str, int n) {
-        return String.join("", Collections.nCopies(n, str));
+    // Nicht Teil der MissionDisk2
+    static String repeat(String str, int n) {
+        return (n > 0) ? str + repeat(str, n - 1) : "";
+    }
+
+    // Nicht Teil der MissionDisk2
+    static String reverse(String str) {
+        return (new StringBuilder(str)).reverse().toString();
     }
 
 	public static int ggT(int a, int b) {
-		int max  = Math.max(a, b);
-		int min  = Math.min(a, b);
+		int max = Math.max(a, b);
+		int min = Math.min(a, b);
         int rest = max % min;
 
 		while (rest != 0) {
-			max  = min;
-			min  = rest;
+			max = min;
+			min = rest;
             rest = max % min;
 		}
 
@@ -29,7 +31,7 @@ public class MissionDisk2 {
     }
 
     // Nicht Teil der MissionDisk2
-	public static boolean istPrimzahl(int x) {
+	static boolean istPrimzahl(int x) {
 		for (int i = 2; i <= x/2; i++) {
             if (x % i == 0) {
                 return false;
@@ -44,17 +46,17 @@ public class MissionDisk2 {
             return String.valueOf(x);
         }
 
-        int primzahl = 2;
+        int jetzigePrimzahl = 2;
         String primfaktoren = "";
 
         while (x != 1) {
-            if (!istPrimzahl(primzahl) || x % primzahl != 0) {
-                primzahl += 1;
+            if (!istPrimzahl(jetzigePrimzahl) || x % jetzigePrimzahl != 0) {
+                jetzigePrimzahl++;
                 continue;
             }
 
-            primfaktoren += String.format("%d ", primzahl);
-            x /= primzahl;
+            primfaktoren += String.format("%d ", jetzigePrimzahl);
+            x /= jetzigePrimzahl;
         }
 
         return primfaktoren.trim();
@@ -75,22 +77,19 @@ public class MissionDisk2 {
 	public static boolean schnapszahl(int x) {
         String str = String.valueOf(x);
 
-		return (x > 9) && (str.matches(String.format("%s{%d}", str.substring(0, 1), str.length())));
+		return str.matches(String.format("^%s{2,}$", str.substring(0, 1)));
 	}
 
 	public static boolean istSymmetrisch(int x) {
-        StringBuilder str = new StringBuilder(String.valueOf(x));
+        String str = String.valueOf(x);
 
-        return String.valueOf(x).equals(str.reverse().toString());
+        return str.equals(reverse(str));
 	}
 
 	public static int umkehren(int x) {
-		String str = new StringBuilder(String.valueOf(x))
-                            .reverse()
-                            .toString()
-                            .replaceAll("^0+(?=[1-9])", "");
-
-        return Integer.valueOf(str);
+        return Integer.valueOf(
+            reverse(String.valueOf(x)).replaceAll("^0+", "")
+        );
 	}
 
 	public static String roemisch(int x) {
@@ -110,55 +109,47 @@ public class MissionDisk2 {
         roemischeZahlen.put(4, "IV");
         roemischeZahlen.put(1, "I");
 
-        String roemisch = "";
+        String roemischeZahl = "";
         Object[] alleTeiler = roemischeZahlen.keySet().toArray();
 
         // {1000, 900, 500, ...}
         Arrays.sort(alleTeiler, Collections.reverseOrder());
 
         for (Object teiler : alleTeiler) {
-            int res = x/((int) teiler);
+            int res = x/((int) (teiler));
 
             if (res >= 1) {
-                roemisch += repeat(roemischeZahlen.get(teiler), res);
-                x -= ((int) teiler)*res;
+                roemischeZahl += repeat(roemischeZahlen.get(teiler), res);
+                x -= ((int) (teiler))*res;
             }
         }
 
-		return roemisch;
+		return roemischeZahl;
 	}
 
 	public static String zahlVorlesen(int x) {
-        Map<Integer, String> einerAussprache = new HashMap<Integer, String>();
+        Map<Integer, String> aussprache = new HashMap<Integer, String>();
 
-        einerAussprache.put(1, "eins");
-        einerAussprache.put(2, "zwei");
-        einerAussprache.put(3, "drei");
-        einerAussprache.put(4, "vier");
-        einerAussprache.put(5, "fuenf");
-        einerAussprache.put(6, "sechs");
-        einerAussprache.put(7, "sieben");
-        einerAussprache.put(8, "acht");
-        einerAussprache.put(9, "neun");
+        aussprache.put(1, "eins");
+        aussprache.put(2, "zwei");
+        aussprache.put(3, "drei");
+        aussprache.put(4, "vier");
+        aussprache.put(5, "fuenf");
+        aussprache.put(6, "sechs");
+        aussprache.put(7, "sieben");
+        aussprache.put(8, "acht");
+        aussprache.put(9, "neun");
+        aussprache.put(10, "zehn");
+        aussprache.put(11, "elf");
+        aussprache.put(12, "zwoelf");
+        aussprache.put(16, "sechzehn");
+        aussprache.put(17, "siebzehn");
 
-        if (x < 10) {
-            return einerAussprache.get(x);
+        if (aussprache.containsKey(x)) {
+            return aussprache.get(x);
         }
 
-        switch (x) {
-            case 10:
-                return "zehn";
-            case 11:
-                return "elf";
-            case 12:
-                return "zwoelf";
-            case 16:
-                return "sechzehn";
-            case 17:
-                return "siebzehn";
-        }
-
-        einerAussprache.put(1, "ein");
+        aussprache.put(1, "ein");
 
         Map<Integer, String> zehnerAussprache = new HashMap<Integer, String>();
 
@@ -175,17 +166,17 @@ public class MissionDisk2 {
                 return zehnerAussprache.get(zehner);
             }
 
-            return einerAussprache.get(zehner) + "zig";
+            return aussprache.get(zehner) + "zig";
         } else if (zehner == 1) {
-            return einerAussprache.get(einser) + "zehn";
+            return aussprache.get(einser) + "zehn";
         }
 
-        String zahl = einerAussprache.get(einser) + "und";
+        String zahl = aussprache.get(einser) + "und";
 
         if (zehnerAussprache.containsKey(zehner)) {
             zahl += zehnerAussprache.get(zehner);
         } else {
-            zahl += einerAussprache.get(zehner) + "zig";
+            zahl += aussprache.get(zehner) + "zig";
         }
 
         return zahl;
